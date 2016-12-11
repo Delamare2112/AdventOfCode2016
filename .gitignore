@@ -3,3 +3,6 @@
 *.tmp
 *.out
 *.idea
+*cmake*
+*CMakeLists.txt
+*eval.txt
