@@ -7,6 +7,7 @@ public class Gun : MonoBehaviour
 	public GameObject bullet;
 	public GameObject spawnPoint;
 	public float speed;
+	public bool numerical;
 
 	string[] input = {
 		"RDLULDLDDRLLLRLRULDRLDDRRRRURLRLDLULDLDLDRULDDLLDRDRUDLLDDRDULLLULLDULRRLDURULDRUULLLUUDURURRDDLDLDRRDDLRURLLDRRRDULDRULURURURURLLRRLUDULDRULLDURRRLLDURDRRUUURDRLLDRURULRUDULRRRRRDLRLLDRRRDLDUUDDDUDLDRUURRLLUDUDDRRLRRDRUUDUUULDUUDLRDLDLLDLLLLRRURDLDUURRLLDLDLLRLLRULDDRLDLUDLDDLRDRRDLULRLLLRUDDURLDLLULRDUUDRRLDUDUDLUURDURRDDLLDRRRLUDULDULDDLLULDDDRRLLDURURURUUURRURRUUDUUURULDLRULRURDLDRDDULDDULLURDDUDDRDRRULRUURRDDRLLUURDRDDRUDLUUDURRRLLRR",
@@ -17,7 +18,7 @@ public class Gun : MonoBehaviour
 	};
 
 	int c;
-	char currentButton;
+	Button currentButton;
 	int line;
 	bool shouldFire;
 	bool loop;
@@ -28,12 +29,11 @@ public class Gun : MonoBehaviour
 		shouldFire = false;
 		line = 0;
 		c = 0;
-		currentButton = '5';
+		currentButton = Button.Buttons['5'];
 	}
 
 	void Update()
 	{
-
 		if (shouldFire)
 		{
 			Instantiate (bullet, spawnPoint.transform.position, Quaternion.Euler (0, -90, 0));
@@ -41,7 +41,7 @@ public class Gun : MonoBehaviour
 		}
 		if (loop)
 		{
-			Vector3 buttonPos = Button.Buttons [currentButton].transform.position + new Vector3(5, 0, 0);
+			Vector3 buttonPos = currentButton.transform.position + new Vector3(5, 0, 0);
 			Vector3 newPos = Vector3.Lerp (transform.position, buttonPos, speed);
 
 			if (Vector3.Distance (newPos, buttonPos) < 0.05f)
@@ -57,22 +57,25 @@ public class Gun : MonoBehaviour
 					}
 					shouldFire = true;
 				}
-//				Debug.Log ("Line: " + line + ": " + c + " / " + (input [line].Length-1) + " (" + input[line][c] + ")");
 				LevelManager.instance.Status.text = "Line: " + line + ": " + c + " / " + (input [line].Length-1) + " (" + input[line][c] + ")";
 				char dir = input[line][c];
 				switch (dir)
 				{
 				case 'R':
-					currentButton += (char)(currentButton == '3' || currentButton == '6' || currentButton == '9' ? 0 : 1);
+					if (currentButton.East)
+						currentButton = currentButton.East;
 					break;
 				case 'L':
-					currentButton -= (char)(currentButton == '1' || currentButton == '4' || currentButton == '7' ? 0 : 1);
+					if (currentButton.West)
+						currentButton = currentButton.West;
 					break;
 				case 'U':
-					currentButton -= (char)(currentButton == '1' || currentButton == '2' || currentButton == '3' ? 0 : 3);
+					if (currentButton.North)
+						currentButton = currentButton.North;
 					break;
 				case 'D':
-					currentButton += (char)(currentButton == '7' || currentButton == '8' || currentButton == '9' ? 0 : 3);
+					if (currentButton.South)
+						currentButton = currentButton.South;
 					break;
 				}
 				c++;
