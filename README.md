@@ -7,3 +7,6 @@ Maybe I'll make a CMake project that includes all the days I do in C++ as target
 It's a simulation!
 
 Watch it run at: http://trevors.website/AdventOfCode/2016/2/
+
+## Day: 3 (Haskell)
+Requires `split` module
