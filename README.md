@@ -2,7 +2,7 @@
 ## Day: 1 (C++)
 Just use your favorite compiler!
 
-Maybe I'll make cmake project that includes all the days I do in C++ as targets or something later down the line.
+Maybe I'll make a CMake project that includes all the days I do in C++ as targets or something later down the line.
 ## Day: 2 (Unity C#)
 It's a simulation!
 
