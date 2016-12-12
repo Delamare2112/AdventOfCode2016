@@ -6,4 +6,4 @@ Maybe I'll make a CMake project that includes all the days I do in C++ as target
 ## Day: 2 (Unity C#)
 It's a simulation!
 
-Watch it run at: http://trevors.website/AdventOfCode/2016/2/1/
+Watch it run at: http://trevors.website/AdventOfCode/2016/2/
